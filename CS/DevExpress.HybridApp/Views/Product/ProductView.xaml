@@ -1,0 +1,67 @@
+﻿<UserControl x:Class="DevExpress.DevAV.Views.ProductView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+        xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+        xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+        xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+        xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+        xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+        xmlns:dxdo="http://schemas.devexpress.com/winfx/2008/xaml/docking"
+        xmlns:dxwui="http://schemas.devexpress.com/winfx/2008/xaml/windowsui"
+        xmlns:dxrudex="http://schemas.devexpress.com/winfx/2008/xaml/reports/userdesignerextensions"
+        xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+        xmlns:viewModel="clr-namespace:DevExpress.DevAV.ViewModels"
+        xmlns:view="clr-namespace:DevExpress.DevAV.Views"
+        xmlns:localization="clr-namespace:DevExpress.DevAV.Localization"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignHeight="400" d:DesignWidth="600" DataContext="{dxmvvm:ViewModelSource viewModel:ProductViewModel}">
+    <UserControl.Resources>
+        <ResourceDictionary Source="../../Resources/EntityViewResources.xaml" />
+    </UserControl.Resources>
+    <DockPanel Style="{StaticResource EntityView.RootContainer}">
+        <dxwui:AppBar DockPanel.Dock="Bottom" Style="{StaticResource EntityView.AppBar}">
+            <dxwui:AppBarButton Style="{StaticResource EntityView.Command.Save}" />
+            <dxwui:AppBarButton Style="{StaticResource EntityView.Command.SaveAndClose}" />
+            <dxwui:AppBarButton Style="{StaticResource EntityView.Command.SaveAndNew}" />
+            <dxwui:AppBarButton Style="{StaticResource EntityView.Command.Reset}" />
+            <dxwui:AppBarButton Style="{StaticResource EntityView.Command.Delete}" />
+        </dxwui:AppBar>
+        <dxlc:DataLayoutControl x:Name="layoutControl" Style="{StaticResource EntityView.DataLayoutControl}">
+            <dxlc:DataLayoutItem x:Name="layoutItemName" Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+            <dxlc:DataLayoutItem x:Name="layoutItemDescription" Binding="{Binding Description, UpdateSourceTrigger=PropertyChanged}" />
+            <dxlc:DataLayoutItem x:Name="layoutItemProductionStart" Binding="{Binding ProductionStart, UpdateSourceTrigger=PropertyChanged}" />
+            <dxlc:DataLayoutItem x:Name="layoutItemAvailable" Binding="{Binding Available, UpdateSourceTrigger=PropertyChanged}" />
+            <dxlc:DataLayoutItem x:Name="layoutItemImage" Binding="{Binding Image, Mode=OneTime}">
+                <dxe:ImageEdit EditValue="{Binding Image, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}" MaxHeight="200" />
+            </dxlc:DataLayoutItem>
+            <dxlc:DataLayoutItem x:Name="layoutItemCurrentInventory" Binding="{Binding CurrentInventory, UpdateSourceTrigger=PropertyChanged}" />
+            <dxlc:DataLayoutItem x:Name="layoutItemBackorder" Binding="{Binding Backorder, UpdateSourceTrigger=PropertyChanged}" />
+            <dxlc:DataLayoutItem x:Name="layoutItemManufacturing" Binding="{Binding Manufacturing, UpdateSourceTrigger=PropertyChanged}" />
+            <dxlc:DataLayoutItem x:Name="layoutItemCost" Binding="{Binding Cost, UpdateSourceTrigger=PropertyChanged}" />
+            <dxlc:DataLayoutItem x:Name="layoutItemSalePrice" Binding="{Binding SalePrice, UpdateSourceTrigger=PropertyChanged}" />
+            <dxlc:DataLayoutItem x:Name="layoutItemRetailPrice" Binding="{Binding RetailPrice, UpdateSourceTrigger=PropertyChanged}" />
+            <dxlc:DataLayoutItem x:Name="layoutItemConsumerRating" Binding="{Binding ConsumerRating, UpdateSourceTrigger=PropertyChanged}" />
+            <dxlc:DataLayoutItem x:Name="layoutItemCategory" Binding="{Binding Category, UpdateSourceTrigger=PropertyChanged}" />
+            <dxlc:DataLayoutItem x:Name="layoutItemEngineer" Binding="{Binding Engineer, Mode=OneTime}">
+                <dxg:LookUpEdit Style="{StaticResource EntityView.LookUpEdit}" DataContext="{Binding ElementName=layoutControl, Path=DataContext}" EditValue="{Binding Entity.EngineerId, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}" ItemsSource="{Binding LookUpEmployees.Entities}" ValueMember="Id" DisplayMember="FullName">
+                    <dxg:LookUpEdit.PopupContentTemplate>
+                        <ControlTemplate TargetType="ContentControl">
+                            <dxg:GridControl x:Name="PART_GridControl" ShowBorder="False" ShowLoadingPanel="{Binding LookUpEmployees.IsLoading}" />
+                        </ControlTemplate>
+                    </dxg:LookUpEdit.PopupContentTemplate>
+                </dxg:LookUpEdit>
+            </dxlc:DataLayoutItem>
+            <dxlc:DataLayoutItem x:Name="layoutItemSupport" Binding="{Binding Support, Mode=OneTime}">
+                <dxg:LookUpEdit Style="{StaticResource EntityView.LookUpEdit}" DataContext="{Binding ElementName=layoutControl, Path=DataContext}" EditValue="{Binding Entity.SupportId, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}" ItemsSource="{Binding LookUpEmployees.Entities}" ValueMember="Id" DisplayMember="FullName">
+                    <dxg:LookUpEdit.PopupContentTemplate>
+                        <ControlTemplate TargetType="ContentControl">
+                            <dxg:GridControl x:Name="PART_GridControl" ShowBorder="False" ShowLoadingPanel="{Binding LookUpEmployees.IsLoading}" />
+                        </ControlTemplate>
+                    </dxg:LookUpEdit.PopupContentTemplate>
+                </dxg:LookUpEdit>
+            </dxlc:DataLayoutItem>
+        </dxlc:DataLayoutControl>
+    </DockPanel>
+</UserControl>

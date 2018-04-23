@@ -1,0 +1,16 @@
+﻿<dx:DXWindow
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+        xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+        xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+        xmlns:Views="clr-namespace:DevExpress.DevAV.Views" x:Class="DevExpress.HybridApp.MainWindow"
+        xmlns:local="clr-namespace:DevExpress.HybridApp"
+        Title="MainWindow" Height="900" Width="1300">
+    <dxmvvm:Interaction.Behaviors>
+        <dx:DXSplashScreenService SplashScreenType="local:LoadingSplashScreen" ShowSplashScreenOnLoading="True" SplashScreenStartupLocation="CenterOwner"/>
+    </dxmvvm:Interaction.Behaviors>
+    <Grid>
+        <Views:DevAVDbView/>
+    </Grid>
+</dx:DXWindow>
