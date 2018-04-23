@@ -1,0 +1,137 @@
+
+<UserControl x:Class="DevExpress.DevAV.Views.EmployeeView" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/presentation" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon" xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol" xmlns:dxwui="http://schemas.devexpress.com/winfx/2008/xaml/windowsui" xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" xmlns:devav="clr-namespace:DevExpress.DevAV" xmlns:viewmodel="clr-namespace:DevExpress.DevAV.ViewModels" mc:Ignorable="d" d:DesignHeight="400" d:DesignWidth="600" DataContext="{dxmvvm:ViewModelSource viewmodel:EmployeeViewModel}">
+    <dxmvvm:Interaction.Behaviors>
+        <dxwui:WinUIMessageBoxService />
+    </dxmvvm:Interaction.Behaviors>
+    <DockPanel>
+        <dxwui:AppBar DockPanel.Dock="Bottom" HideMode="AlwaysVisible">
+            <dxwui:AppBarButton Label="Save" Command="{Binding SaveCommand}" Glyph="{dx:DXImageGrayscale Image=Save_32x32.png}" IsEllipseEnabled="False" AllowGlyphTheming="True" GlyphStretch="None" HorizontalAlignment="Center" />
+            <dxwui:AppBarButton Label="Save And Close" Command="{Binding SaveAndCloseCommand}" Glyph="{dx:DXImageGrayscale Image=SaveAndClose_32x32.png}" IsEllipseEnabled="False" AllowGlyphTheming="True" GlyphStretch="None" HorizontalAlignment="Center" />
+            <dxwui:AppBarButton Label="Save And New" Command="{Binding SaveAndNewCommand}" Glyph="{dx:DXImageGrayscale Image=SaveAndNew_32x32.png}" IsEllipseEnabled="False" AllowGlyphTheming="True" GlyphStretch="None" HorizontalAlignment="Center" />
+            <dxwui:AppBarButton Label="Reset Changes" Command="{Binding ResetCommand}" Glyph="{dx:DXImageGrayscale Image=Reset_32x32.png}" IsEllipseEnabled="False" AllowGlyphTheming="True" GlyphStretch="None" HorizontalAlignment="Center" />
+            <dxwui:AppBarButton Label="Delete" Command="{Binding DeleteCommand}" Glyph="{dx:DXImageGrayscale Image=Delete_32x32.png}" IsEllipseEnabled="False" AllowGlyphTheming="True" GlyphStretch="None" HorizontalAlignment="Center" />
+        </dxwui:AppBar>
+        <dxlc:LayoutControl Orientation="Vertical" Padding="67,0,43,0" Margin="0,0,0,16" dx:ScrollViewerTouchBehavior.IsEnabled="True">
+            <dxlc:LayoutItem Label="First Name" IsRequired="True">
+                <dxe:TextEdit EditValue="{Binding Entity.FirstName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}" />
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Label="Last Name" IsRequired="True">
+                <dxe:TextEdit EditValue="{Binding Entity.LastName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}" />
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Label="Prefix">
+                <dxe:ComboBoxEdit EditValue="{Binding Entity.Prefix, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}" IsTextEditable="False">
+                    <dxe:ComboBoxEdit.ItemsSource>
+                        <dxe:EnumItemsSource EnumType="devav:PersonPrefix" />
+                    </dxe:ComboBoxEdit.ItemsSource>
+                </dxe:ComboBoxEdit>
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Label="Home Phone">
+                <dxe:TextEdit EditValue="{Binding Entity.HomePhone, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}" MaskType="Simple" Mask="(000) 000-0000" MaskUseAsDisplayFormat="True" />
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Label="Mobile Phone" IsRequired="True">
+                <dxe:TextEdit EditValue="{Binding Entity.MobilePhone, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}" MaskType="Simple" Mask="(000) 000-0000" MaskUseAsDisplayFormat="True" />
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Label="Email" IsRequired="True">
+                <dxe:TextEdit EditValue="{Binding Entity.Email, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}" />
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Label="Skype">
+                <dxe:TextEdit EditValue="{Binding Entity.Skype, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}" />
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Label="Birth Date">
+                <dxe:DateEdit EditValue="{Binding Entity.BirthDate, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}" />
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Label="Picture">
+                <dxe:ImageEdit EditValue="{Binding Entity.Picture, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}" MaxHeight="200" />
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Label="Address State">
+                <dxe:ComboBoxEdit EditValue="{Binding Entity.AddressState, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}" IsTextEditable="False">
+                    <dxe:ComboBoxEdit.ItemsSource>
+                        <dxe:EnumItemsSource EnumType="devav:StateEnum" />
+                    </dxe:ComboBoxEdit.ItemsSource>
+                </dxe:ComboBoxEdit>
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Label="Address Line">
+                <dxe:TextEdit EditValue="{Binding Entity.AddressLine, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}" />
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Label="Address City">
+                <dxe:TextEdit EditValue="{Binding Entity.AddressCity, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}" />
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Label="Address Zip Code">
+                <dxe:TextEdit EditValue="{Binding Entity.AddressZipCode, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}" />
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Label="Department">
+                <dxe:ComboBoxEdit EditValue="{Binding Entity.Department, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}" IsTextEditable="False">
+                    <dxe:ComboBoxEdit.ItemsSource>
+                        <dxe:EnumItemsSource EnumType="devav:EmployeeDepartment" />
+                    </dxe:ComboBoxEdit.ItemsSource>
+                </dxe:ComboBoxEdit>
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Label="Title" IsRequired="True">
+                <dxe:TextEdit EditValue="{Binding Entity.Title, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}" />
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Label="Status">
+                <dxe:ComboBoxEdit EditValue="{Binding Entity.Status, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}" IsTextEditable="False">
+                    <dxe:ComboBoxEdit.ItemsSource>
+                        <dxe:EnumItemsSource EnumType="devav:EmployeeStatus" />
+                    </dxe:ComboBoxEdit.ItemsSource>
+                </dxe:ComboBoxEdit>
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Label="Hire Date">
+                <dxe:DateEdit EditValue="{Binding Entity.HireDate, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}" />
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Label="Personal Profile">
+                <dxe:TextEdit EditValue="{Binding Entity.PersonalProfile, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}" />
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Label="Order">
+                <dxe:TextEdit EditValue="{Binding Entity.Order, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}" MaskType="Numeric" Mask="d" MaskUseAsDisplayFormat="True" HorizontalContentAlignment="Right" />
+            </dxlc:LayoutItem>
+            <dxlc:LayoutGroup View="Tabs" MinHeight="300">
+                <dxlc:LayoutGroup DataContext="{Binding EmployeeAssignedTasksDetails}" dxlc:LayoutControl.TabHeader="AssignedTasks">
+                    <dxg:GridControl Name="AssignedTasksGrid" ItemsSource="{Binding Entities}" SelectedItem="{Binding SelectedEntity}" ShowLoadingPanel="{Binding IsLoading}">
+                        <dxmvvm:Interaction.Behaviors>
+                            <dxmvvm:EventToCommand PassEventArgsToCommand="True" Command="{Binding EditCommand}" EventName="MouseDoubleClick">
+                                <dxmvvm:EventToCommand.EventArgsConverter>
+                                    <dx:EventArgsToDataRowConverter />
+                                </dxmvvm:EventToCommand.EventArgsConverter>
+                            </dxmvvm:EventToCommand>
+                        </dxmvvm:Interaction.Behaviors>
+                        <dxg:GridControl.Columns>
+                            <dxg:GridColumn IsSmart="True" FieldName="Subject" />
+                            <dxg:GridColumn IsSmart="True" FieldName="Description" />
+                            <dxg:GridColumn IsSmart="True" FieldName="StartDate" />
+                            <dxg:GridColumn IsSmart="True" FieldName="DueDate" />
+                            <dxg:GridColumn IsSmart="True" FieldName="Status" />
+                            <dxg:GridColumn IsSmart="True" FieldName="Priority" />
+                            <dxg:GridColumn IsSmart="True" FieldName="Completion" />
+                            <dxg:GridColumn IsSmart="True" FieldName="Reminder" />
+                            <dxg:GridColumn IsSmart="True" FieldName="ReminderDateTime" />
+                            <dxg:GridColumn FieldName="AssignedEmployee.FullName" Header="Assigned Employee" ReadOnly="True" />
+                        </dxg:GridControl.Columns>
+                        <dxg:GridControl.TotalSummary>
+                            <dxg:GridSummaryItem SummaryType="Count" Alignment="Right" />
+                        </dxg:GridControl.TotalSummary>
+                        <dxg:GridControl.GroupSummary>
+                            <dxg:GridSummaryItem SummaryType="Count" />
+                        </dxg:GridControl.GroupSummary>
+                        <dxg:GridControl.View>
+                            <dxg:TableView AllowEditing="False" ShowFixedTotalSummary="True" AllowPerPixelScrolling="True" ShowGroupPanel="False" ShowIndicator="False">
+                                <dxg:TableView.RowCellMenuCustomizations>
+                                    <dxb:BarButtonItem Content="New" Command="{Binding View.DataContext.NewCommand}" Glyph="{dx:DXImageGrayscale Image=New_16x16.png}" />
+                                    <dxb:BarButtonItem Content="Edit" Command="{Binding View.DataContext.EditCommand}" CommandParameter="{Binding Row.Row}" Glyph="{dx:DXImageGrayscale Image=Edit_16x16.png}" />
+                                    <dxb:BarButtonItem Content="Delete" Command="{Binding View.DataContext.DeleteCommand}" CommandParameter="{Binding Row.Row}" Glyph="{dx:DXImageGrayscale Image=Delete_16x16.png}" />
+                                    <dxb:BarButtonItem Content="Refresh" Command="{Binding View.DataContext.RefreshCommand}" Glyph="{dx:DXImageGrayscale Image=Refresh_16x16.png}" />
+                                </dxg:TableView.RowCellMenuCustomizations>
+                            </dxg:TableView>
+                        </dxg:GridControl.View>
+                    </dxg:GridControl>
+                    <dxlc:LayoutGroup Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Top" MinWidth="100">
+                        <Button Content="New" Command="{Binding NewCommand}" />
+                        <Button Content="Edit" Command="{Binding EditCommand}" CommandParameter="{Binding SelectedEntity}" />
+                        <Button Content="Delete" Command="{Binding DeleteCommand}" CommandParameter="{Binding SelectedEntity}" />
+                        <Button Content="Refresh" Command="{Binding RefreshCommand}" />
+                    </dxlc:LayoutGroup>
+                </dxlc:LayoutGroup>
+            </dxlc:LayoutGroup>
+        </dxlc:LayoutControl>
+    </DockPanel>
+</UserControl>
