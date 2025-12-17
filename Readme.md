@@ -4,4 +4,4 @@ You can use the [Items Source Wizard](https://docs.devexpress.com/WPF/16553/what
 
 The [WPF Template Gallery](https://docs.devexpress.com/WPF/16495/whats-installed/template-gallery) contains a set of popular application layouts of DevExpress Controls, which you can use in your application.
 
-The current approach will not be updated in the future.
+The current repository will not be updated in the future.
